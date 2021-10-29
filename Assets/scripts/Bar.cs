@@ -17,8 +17,8 @@ public class Bar : MonoBehaviour
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        collision.transform.parent = gameObject.transform;
-        Destroy(collision.gameObject.GetComponent<Rigidbody2D>());
+        //collision.transform.parent = gameObject.transform;
+        //Destroy(collision.gameObject.GetComponent<Rigidbody2D>());
         //Destroy(collision.gameObject.GetComponent<CircleCollider2D>());
     }
 }
