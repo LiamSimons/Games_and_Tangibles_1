@@ -17,6 +17,8 @@ public class FollowMouse : MonoBehaviour
 
     public float playerOldX;
 
+    public bool onHelmet = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -35,7 +37,7 @@ public class FollowMouse : MonoBehaviour
         //transform.localPosition = new Vector3(transform.localPosition.x, transform.localPosition.y, Mathf.Lerp(transform.localPosition.z, transform.localPosition.z, Time.deltaTime * 1));
         //Rigidbody2D playerRigidBody = player.GetComponent<Rigidbody2D>();
         
-        if (playerOldX != player.transform.position.x)
+        if (playerOldX != player.transform.position.x && onHelmet)
         {
             transform.position = new Vector3(Mathf.Lerp(transform.position.x, player.transform.position.x, Time.deltaTime * moveSpeed), transform.position.y, transform.position.z);
         }
@@ -86,6 +88,18 @@ public class FollowMouse : MonoBehaviour
         {
             transform.position += Vector3.left * 100;
             //transform.Translate(movement);
+        }
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if(collision.gameObject.tag == "Ground")
+        {
+            Destroy(gameObject);
+        }
+        else
+        {
+            onHelmet = true;
         }
     }
 }
