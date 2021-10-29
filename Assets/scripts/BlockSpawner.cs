@@ -9,7 +9,9 @@ public class BlockSpawner : MonoBehaviour
 
     Timer fallTimer;
 
+    [SerializeField]
     float minTime = 1;
+    [SerializeField]
     float maxTime = 4;
 
     float minX;

@@ -220,6 +220,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   prefabBlock: {fileID: 141465308771599435, guid: f5d09187132ee654bb0548a3cc5cdf57, type: 3}
+  minTime: 2
+  maxTime: 4
 --- !u!850595691 &220789396
 LightingSettings:
   m_ObjectHideFlags: 0

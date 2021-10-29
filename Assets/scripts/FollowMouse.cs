@@ -8,16 +8,22 @@ public class FollowMouse : MonoBehaviour
     // variables
     private Vector3 mousePosition;
     [SerializeField]
-    public float moveSpeed = 0.1f;
+    public float moveSpeed = 2;
+    [SerializeField]
+    public float thresholdVerticalSpeed = 1;
+
     float inertiacounter = 0f;
 
-    public bool goingLeft = false;
-    public bool goingRight = false;
+    bool goingLeft = false;
+    bool goingRight = false;
     //public float playerSpeed;
 
-    public float playerOldX;
+    float playerOldX;
 
-    public bool onHelmet = false;
+    bool onHelmet = false;
+    bool falling = true;
+
+    
 
     // Start is called before the first frame update
     void Start()
@@ -36,8 +42,12 @@ public class FollowMouse : MonoBehaviour
         //transform.position = Vector2.Lerp(transform.position, player.transform.position, moveSpeed);
         //transform.localPosition = new Vector3(transform.localPosition.x, transform.localPosition.y, Mathf.Lerp(transform.localPosition.z, transform.localPosition.z, Time.deltaTime * 1));
         //Rigidbody2D playerRigidBody = player.GetComponent<Rigidbody2D>();
-        
-        if (playerOldX != player.transform.position.x && onHelmet)
+        Rigidbody2D blockRigidBody = GetComponent<Rigidbody2D>();
+        if(blockRigidBody.velocity.y > thresholdVerticalSpeed || blockRigidBody.velocity.y < -thresholdVerticalSpeed)
+        {
+            falling = true;
+        }
+        if (playerOldX != player.transform.position.x && onHelmet && !falling)
         {
             transform.position = new Vector3(Mathf.Lerp(transform.position.x, player.transform.position.x, Time.deltaTime * moveSpeed), transform.position.y, transform.position.z);
         }
@@ -100,6 +110,7 @@ public class FollowMouse : MonoBehaviour
         else
         {
             onHelmet = true;
+            falling = false;
         }
     }
 }
